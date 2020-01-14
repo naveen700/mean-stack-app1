@@ -1,0 +1,43 @@
+<!-- Properties of html element  can be directly  targeted using [] around property -->
+<!-- #postInput is a refrence to textarea element like a variable , which we can pass in function onAddPost() -->
+<!-- <textarea  rows="6" [value] = "newPost"   #postInput></textarea> -->
+
+<!-- ngModel is a directive used to create 2 way binding. this need to imported in app.module it is in FormsModule -->
+<!-- so far we have learned four things
+    1. String interpolation {{ variableToEval }} 
+    2. event binding eg :- (click)="methodName()"
+    3. property binding eg:-  [propertyname] ="variableName"
+    4. 2 way binding using [(ngModel)] -->
+
+<!-- matInput is a selector use to convert normal input field to angular material element. this comes from @angular/material package from MatInputField -->
+
+<!-- <mat-card>
+    <mat-form-field>
+        <input matInput  type="text" [(ngModel)]= "enteredTitle" >
+    </mat-form-field>
+    <mat-form-field>
+        <textarea matInput rows="6" [value]="newPost" [(ngModel)]="enteredContent"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="onAddPost(postInput)">Save</button>
+</mat-card> -->
+
+<!-- Using form to handle all input -->
+<!-- #postForm is a local reference, we can create local refrence to refer to any html element ,it is  used to refrence to ngForm here(attached to form by angular internally.) -->
+<!-- There are 3 ways to get access to element like title element here -->
+<!-- 1. #title="ngModel" this gives control to access the html element using local refrence title. -->
+<!-- 2. postForm.getControl('title') -->
+<!-- 3. [formControl]="title" -->
+
+<mat-card>
+    <form (submit)= "onAddPost(postForm)" #postForm="ngForm">
+        <mat-form-field>
+            <input matInput type="text" name="title" ngModel required minlength="3" #title="ngModel">
+            <mat-error *ngIf="title.invalid">Please enter post title</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput  rows="6" [value]="newPost" name="content" ngModel required #content="ngModel"></textarea>
+            <mat-error *ngIf="content.invalid">Please enter post content </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Save</button>
+    </form>
+</mat-card>

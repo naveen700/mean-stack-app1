@@ -1,0 +1,12 @@
+mat-accordian{
+    margin-top: 1 rem;
+    display: block;
+}
+.post-list{
+    width: 84.5% !important;
+    margin: auto !important;
+    margin-top: 14px !important;
+}
+.info-text{
+    text-align: center;
+}
