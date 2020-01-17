@@ -3,6 +3,7 @@ import {EventEmitter} from '@angular/core';
 import {Output} from '@angular/core';
 import {Post} from '../post.model';
 import { NgForm } from '@angular/forms';
+import { PostsService } from '../posts.service';
  
 // '@' below is the decorator which are used to define or mark class as component, so that Angular could know that this is component.
 // template can have html in it to use for the component.
@@ -34,15 +35,20 @@ export class PostCreateComponent {
     //     this.postCreated.emit(post)
     // }
 
-    //usign NgForms
+    //using NgForms
     onAddPost(form:NgForm) {
         if(form.invalid){
             return;
         }
-        // form.value.title title here is a name of html element access through  NgForms
-        const post:Post = { title: form.value.title, content: form.value.content };
-        this.postCreated.emit(post)
+        // send data btw components using events
+            // form.value.title title here is a name of html element access through  NgForms
+            // const post:Post = { title: form.value.title, content: form.value.content };
+            // this.postCreated.emit(post)
+
+        // send data btw components using Services
+            this.postsService.onAddPost(form.value.title ,form.value.content);
     }
 
+    constructor(public postsService: PostsService){}
 
 }
